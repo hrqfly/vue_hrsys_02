@@ -64,6 +64,7 @@ import router from "@/router/index";
           router.push('/adduser')
         }
       },
+      // 查询招聘计划表
       getRecruitmentPlan(a,b){
         console.log(a)
         console.log(b)
