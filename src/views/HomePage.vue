@@ -9,6 +9,13 @@
             lazy
             @node-click = "getUserByName">
         </el-tree>
+        <el-tree
+            :props="props1"
+            :load="loadNode1"
+            lazy
+            @node-click = "getRecruitmentPlan"
+            width="200px">
+        </el-tree>
       </el-aside>
       <el-container>
         <el-header>Moose通用人力资源系统</el-header>
@@ -37,6 +44,11 @@ import router from "@/router/index";
           children: 'zones',
           isLeaf: 'leaf'
         },
+        props1: {
+          label: 'name',
+          children: 'zones',
+          isLeaf: 'leaf'
+        },
         tableData:[]
       };
     },
@@ -48,14 +60,20 @@ import router from "@/router/index";
         if(a.name=='查询员工信息'){
           router.push('/queryuser')
         }
-        //发送请求去后端查询数据
-        // axios.get('http://localhost:8010/findplan?post='+"coo")
-        //     .then(res => {
-        //         console.log(res.data.data)
-        //         this.tableData = res.data.data
-        //     })
+        if (a.name=='增加员工账号'){
+          router.push('/adduser')
+        }
       },
-
+      getRecruitmentPlan(a,b){
+        console.log(a)
+        console.log(b)
+        if(a.name=='查询招聘信息'){
+          router.push('/queryplan')
+        }
+        if (a.name=='增加员工账号'){
+          router.push('/adduser')
+        }
+      },
       divClick(){
         //发送请求去后端查询数据
         axios.get('http://localhost:8010/findplan?post='+"coo")
@@ -77,11 +95,30 @@ import router from "@/router/index";
             name: '查询员工信息',
             leaf: true
           }, {
-            name: '增加员工',
+            name: '增加员工账号',
             leaf: true
           }];
           resolve(data);
-        }, 500);
+        }, 200);
+      },
+
+      loadNode1(node, resolve) {
+        //点击的那个菜单
+        if (node.level === 0) {
+          return resolve([{ name: '招聘管理' }]);
+        }
+        if (node.level > 1) return resolve([]);
+
+        setTimeout(() => {
+          const data = [{
+            name: '查询招聘信息',
+            leaf: true
+          }, {
+            name: '招聘信息发布',
+            leaf: true
+          }];
+          resolve(data);
+        }, 200);
       }
     }
   };

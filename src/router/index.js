@@ -27,6 +27,11 @@ const router = createRouter({
             path:"/queryplan",
             component:()=>import("../views/RecruitmentPlanPage.vue")
         },
+        {
+            name:"adduser",
+            path:"/adduser",
+            component:()=>import("../views/AddUserPage.vue")
+        },
     ]
 })
 export default router
