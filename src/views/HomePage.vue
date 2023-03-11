@@ -71,8 +71,8 @@ import router from "@/router/index";
         if(a.name=='查询招聘信息'){
           router.push('/queryplan')
         }
-        if (a.name=='增加员工账号'){
-          router.push('/adduser')
+        if (a.name=='招聘信息发布'){
+          router.push('/addplan')
         }
       },
       divClick(){

@@ -32,6 +32,11 @@ const router = createRouter({
             path:"/adduser",
             component:()=>import("../views/AddUserPage.vue")
         },
+        {
+            name:"addplan",
+            path:"/addplan",
+            component:()=>import("../views/AddPlanPage.vue")
+        },
     ]
 })
 export default router
