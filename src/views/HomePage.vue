@@ -13,8 +13,13 @@
             :props="props1"
             :load="loadNode1"
             lazy
-            @node-click = "getRecruitmentPlan"
-            width="200px">
+            @node-click = "getRecruitmentPlan">
+        </el-tree>
+        <el-tree
+            :props="props2"
+            :load="loadNode2"
+            lazy
+            @node-click = "getTrain">
         </el-tree>
       </el-aside>
       <el-container>
@@ -49,6 +54,11 @@ import router from "@/router/index";
           children: 'zones',
           isLeaf: 'leaf'
         },
+        props2: {
+          label: 'name',
+          children: 'zones',
+          isLeaf: 'leaf'
+        },
         tableData:[]
       };
     },
@@ -73,6 +83,16 @@ import router from "@/router/index";
         }
         if (a.name=='招聘信息发布'){
           router.push('/addplan')
+        }
+      },
+      getTrain(a,b){
+        console.log(a)
+        console.log(b)
+        if(a.name=='查询培训信息'){
+          router.push('/querytrain')
+        }
+        if (a.name=='培训信息发布'){
+          router.push('/addtrain')
         }
       },
       divClick(){
@@ -116,6 +136,25 @@ import router from "@/router/index";
             leaf: true
           }, {
             name: '招聘信息发布',
+            leaf: true
+          }];
+          resolve(data);
+        }, 200);
+      },
+
+      loadNode2(node, resolve) {
+        //点击的那个菜单
+        if (node.level === 0) {
+          return resolve([{ name: '培训管理' }]);
+        }
+        if (node.level > 1) return resolve([]);
+
+        setTimeout(() => {
+          const data = [{
+            name: '查询培训信息',
+            leaf: true
+          }, {
+            name: '培训信息发布',
             leaf: true
           }];
           resolve(data);

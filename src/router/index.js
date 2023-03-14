@@ -37,6 +37,21 @@ const router = createRouter({
             path:"/addplan",
             component:()=>import("../views/AddPlanPage.vue")
         },
+        {
+            name:"addtrain",
+            path:"/addtrain",
+            component:()=>import("../views/AddTrainPage.vue")
+        },
+        {
+            name:"querytrain",
+            path:"/querytrain",
+            component:()=>import("../views/QueryTrainPage.vue")
+        },
+        {
+            name:"querysalary",
+            path:"/querysalary",
+            component:()=>import("../views/QuerySalaryPage.vue")
+        }
     ]
 })
 export default router
