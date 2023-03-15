@@ -88,11 +88,14 @@ import router from "@/router/index";
       getTrain(a,b){
         console.log(a)
         console.log(b)
-        if(a.name=='查询培训信息'){
+        if(a.name=='查询培训信息与签到'){
           router.push('/querytrain')
         }
         if (a.name=='培训信息发布'){
           router.push('/addtrain')
+        }
+        if(a.name=='培训信息签到查询'){
+          router.push('/querytrainusers')
         }
       },
       divClick(){
@@ -151,10 +154,13 @@ import router from "@/router/index";
 
         setTimeout(() => {
           const data = [{
-            name: '查询培训信息',
+            name: '查询培训信息与签到',
             leaf: true
           }, {
             name: '培训信息发布',
+            leaf: true
+          }, {
+            name:'培训信息签到查询',
             leaf: true
           }];
           resolve(data);

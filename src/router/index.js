@@ -51,6 +51,11 @@ const router = createRouter({
             name:"querysalary",
             path:"/querysalary",
             component:()=>import("../views/QuerySalaryPage.vue")
+        },
+        {
+            name:"querytrainusers",
+            path:"/querytrainusers",
+            component:()=>import("../views/QueryTrainUsersPage.vue")
         }
     ]
 })
