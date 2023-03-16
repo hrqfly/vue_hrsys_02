@@ -10,16 +10,22 @@
             @node-click = "getUserByName">
         </el-tree>
         <el-tree
-            :props="props1"
+            :props="props"
             :load="loadNode1"
             lazy
             @node-click = "getRecruitmentPlan">
         </el-tree>
         <el-tree
-            :props="props2"
+            :props="props"
             :load="loadNode2"
             lazy
             @node-click = "getTrain">
+        </el-tree>
+        <el-tree
+            :props="props"
+            :load="loadNode3"
+            lazy
+            @node-click = "getSalary">
         </el-tree>
       </el-aside>
       <el-container>
@@ -45,16 +51,6 @@ import router from "@/router/index";
     data() {
       return {
         props: {
-          label: 'name',
-          children: 'zones',
-          isLeaf: 'leaf'
-        },
-        props1: {
-          label: 'name',
-          children: 'zones',
-          isLeaf: 'leaf'
-        },
-        props2: {
           label: 'name',
           children: 'zones',
           isLeaf: 'leaf'
@@ -96,6 +92,13 @@ import router from "@/router/index";
         }
         if(a.name=='培训信息签到查询'){
           router.push('/querytrainusers')
+        }
+      },
+      getSalary(a,b){
+        console.log(a)
+        console.log(b)
+        if(a.name=='薪资记录查询'){
+          router.push('/querysalary')
         }
       },
       divClick(){
@@ -161,6 +164,21 @@ import router from "@/router/index";
             leaf: true
           }, {
             name:'培训信息签到查询',
+            leaf: true
+          }];
+          resolve(data);
+        }, 200);
+      },
+      loadNode3(node, resolve) {
+        //点击的那个菜单
+        if (node.level === 0) {
+          return resolve([{ name: '薪资管理' }]);
+        }
+        if (node.level > 1) return resolve([]);
+
+        setTimeout(() => {
+          const data = [{
+            name: '薪资记录查询',
             leaf: true
           }];
           resolve(data);
