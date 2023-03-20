@@ -27,7 +27,6 @@
           label="操作"
           width="100">
         <template #default="scope">
-<!--          <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>-->
           <el-button @click="handleSignIn(scope.row)" type="text" size="small">签到</el-button>
         </template>
       </el-table-column>
@@ -41,6 +40,9 @@ import axios from "axios";
 export default {
   data() {
     return {
+      cookies:{
+        cookies : document.cookie.split("; ")[0].split("=")[1],
+      },
       formInline: {
         time: ''
       },
@@ -67,14 +69,11 @@ export default {
             }
           })
     },
-    // handleClick(row){
-    //     console.log(row.id)
-    // },
     handleSignIn(row){
         this.$data.signInInf.id = row.id
         this.$data.signInInf.date = row.time
-        this.$data.signInInf.userId = 3
-        this.$data.signInInf.userName = 'fly'
+        this.$data.signInInf.userId = this.cookies.cookies.split("#")[0];
+        this.$data.signInInf.userName = this.cookies.cookies.split("#")[1]
         axios.post("http://localhost:8010/trainsignin",this.$data.signInInf)
             .then(res => {
               if(res.data.status == 200){

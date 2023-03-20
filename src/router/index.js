@@ -56,6 +56,16 @@ const router = createRouter({
             name:"querytrainusers",
             path:"/querytrainusers",
             component:()=>import("../views/QueryTrainUsersPage.vue")
+        },
+        {
+            name:"querycontract",
+            path:"/querycontract",
+            component:()=>import("../views/QueryContractPage.vue")
+        },
+        {
+            name:"userinf",
+            path:"/userinf",
+            component:()=>import("../views/UserInfPage.vue")
         }
     ]
 })

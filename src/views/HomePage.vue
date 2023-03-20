@@ -27,9 +27,20 @@
             lazy
             @node-click = "getSalary">
         </el-tree>
+        <el-tree
+            :props="props"
+            :load="loadNode4"
+            lazy
+            @node-click = "getContract">
+        </el-tree>
       </el-aside>
       <el-container>
-        <el-header>Moose通用人力资源系统</el-header>
+        <el-header>
+          Moose通用人力资源系统
+          <div style = "float:right">
+            <el-icon><User @click = "handleUser" /></el-icon>
+          </div>
+        </el-header>
         <el-main>
           <h2 id="ti">招聘公告</h2>
           <el-table :data="tableData" border style="width: 100%">
@@ -47,9 +58,13 @@
 <script>
 import axios from "axios";
 import router from "@/router/index";
+
   export default {
     data() {
       return {
+        cookies:{
+          cookies : document.cookie
+        },
         props: {
           label: 'name',
           children: 'zones',
@@ -59,11 +74,30 @@ import router from "@/router/index";
       };
     },
     methods: {
+      //合同查询
+      handleUser(){
+        //路由到用户界面
+        console.log(this.cookies.cookies)
+        console.log("----------------")
+        if (this.cookies.cookies==""){
+          router.push('/login')
+        } else {
+          // 跳转到用户信息
+          router.push('/userinf')
+        }
+      },
+      getContract(a,b){
+        console.log(a)
+        console.log(b)
+        if(a.name=='合同查询'){
+          router.push('/querycontract')
+        }
+      },
       //查询用户
       getUserByName(a,b){
         console.log(a)
         console.log(b)
-        if(a.name=='查询员工信息'){
+        if(a.name=='员工信息查询与编辑'){
           router.push('/queryuser')
         }
         if (a.name=='增加员工账号'){
@@ -90,7 +124,7 @@ import router from "@/router/index";
         if (a.name=='培训信息发布'){
           router.push('/addtrain')
         }
-        if(a.name=='培训信息签到查询'){
+        if(a.name=='培训签到查询'){
           router.push('/querytrainusers')
         }
       },
@@ -119,7 +153,7 @@ import router from "@/router/index";
 
         setTimeout(() => {
           const data = [{
-            name: '查询员工信息',
+            name: '员工信息查询与编辑',
             leaf: true
           }, {
             name: '增加员工账号',
@@ -163,7 +197,7 @@ import router from "@/router/index";
             name: '培训信息发布',
             leaf: true
           }, {
-            name:'培训信息签到查询',
+            name:'培训签到查询',
             leaf: true
           }];
           resolve(data);
@@ -179,6 +213,21 @@ import router from "@/router/index";
         setTimeout(() => {
           const data = [{
             name: '薪资记录查询',
+            leaf: true
+          }];
+          resolve(data);
+        }, 200);
+      },
+      loadNode4(node, resolve) {
+        //点击的那个菜单
+        if (node.level === 0) {
+          return resolve([{ name: '合同管理' }]);
+        }
+        if (node.level > 1) return resolve([]);
+
+        setTimeout(() => {
+          const data = [{
+            name: '合同查询',
             leaf: true
           }];
           resolve(data);

@@ -27,10 +27,14 @@ const form = reactive({
 
 })
 
+let cookies = document.cookie.split("; ")
+let cookie = cookies[0].split("#")
+console.log(cookie[1])
+
 const onSubmit = () => {
   console.log(form.id)
   console.log(form.password)
-  axios.post("http://localhost:8010/login",{'id':form.id,'password':form.password})
+  axios.post("http://localhost:8010/login",{'id':form.id,'password':form.password},{withCredentials: true})
   .then(res =>{
     console.log(res)
 
@@ -42,7 +46,10 @@ const onSubmit = () => {
     }
 
   })
+
+
 }
+
 </script>
 
 <style scoped>
