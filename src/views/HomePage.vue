@@ -47,6 +47,7 @@
             <el-table-column prop="post" label="职位" width="160" />
             <el-table-column prop="num" label="招聘人数" width="160" />
             <el-table-column prop="age" label="年龄要求" width="160" />
+            <el-table-column prop="wages" label="薪资" width="160" />
             <el-table-column prop="requirements" label="要求" />
           </el-table>
         </el-main>
@@ -127,6 +128,9 @@ import router from "@/router/index";
         if(a.name=='培训签到查询'){
           router.push('/querytrainusers')
         }
+        if(a.name=='用户签到查询'){
+          router.push('/queryUserSignTrains')
+        }
       },
       getSalary(a,b){
         console.log(a)
@@ -199,7 +203,10 @@ import router from "@/router/index";
           }, {
             name:'培训签到查询',
             leaf: true
-          }];
+          }, {
+              name:'用户签到查询',
+              leaf: true
+            }];
           resolve(data);
         }, 200);
       },

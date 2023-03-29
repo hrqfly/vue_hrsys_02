@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1  id = "con">合同查询</h1>
+    <h1 style="text-align: center">合同查询</h1>
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="员工姓名">
         <el-input v-model="formInline.name" placeholder="员工姓名"></el-input>
@@ -11,8 +11,8 @@
     </el-form>
 
     <el-table :data="tableData" border style="width: 100%">
-      <el-table-column prop="id" label="合同号" width="200" />
-      <el-table-column prop="userId" label="工号" width="200" />
+      <el-table-column prop="id" label="合同号" width="100" />
+      <el-table-column prop="userId" label="工号" width="100" />
       <el-table-column prop="post" label="岗位" width="200" />
       <el-table-column prop="userName" label="签约人" width="200" />
       <el-table-column prop="wage" label="薪资" width="200" />

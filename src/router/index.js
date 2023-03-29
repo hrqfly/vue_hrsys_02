@@ -67,6 +67,11 @@ const router = createRouter({
             name:"userinf",
             path:"/userinf",
             component:()=>import("../views/UserInfPage.vue")
+        },
+        {
+            name:"queryUserSignTrains",
+            path:"/queryUserSignTrains",
+            component:()=>import("../views/QueryUserSignTrainsPage.vue")
         }
     ]
 })
