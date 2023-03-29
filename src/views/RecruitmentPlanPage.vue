@@ -8,6 +8,9 @@
       <el-form-item>
         <el-button type="primary" @click="onSubmit" @keyup.enter="onSubmit">查询</el-button>
       </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="handleApproval">审批招聘计划</el-button>
+      </el-form-item>
     </el-form>
 
     <el-table :data="tableData" border style="width: 100%">
@@ -23,6 +26,7 @@
 
 <script>
 import axios from "axios";
+import router from "@/router/index";
 export default {
   data() {
     return {
@@ -45,6 +49,9 @@ export default {
               alert(res.data.msg)
             }
           })
+    },
+    handleApproval(){
+      router.push("/approvalPlan")
     }
   }
 }

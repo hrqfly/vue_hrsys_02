@@ -5,7 +5,7 @@
         src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
     />
     <button @click="handlerLogout" style="float: right">
-      <h4>登出</h4>
+      <h3>登出</h3>
     </button>
   </div>
   <div class="userInf">
