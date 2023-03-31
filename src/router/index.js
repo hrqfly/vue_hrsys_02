@@ -77,6 +77,11 @@ const router = createRouter({
             name:"approvalPlan",
             path:"/approvalPlan",
             component:()=>import("../views/ApprovalPlanPage.vue")
+        },
+        {
+            name:"attendance",
+            path:"/attendance",
+            component:()=>import("../views/AttendancePage.vue")
         }
     ]
 })

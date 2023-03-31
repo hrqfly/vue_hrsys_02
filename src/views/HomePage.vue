@@ -5,6 +5,12 @@
         菜单栏
         <el-tree
             :props="props"
+            :load="loadNode0"
+            lazy
+            @node-click = "Attendance">
+        </el-tree>
+        <el-tree
+            :props="props"
             :load="loadNode"
             lazy
             @node-click = "getUserByName">
@@ -75,6 +81,13 @@ import router from "@/router/index";
       };
     },
     methods: {
+      //考勤
+      Attendance(a,b){
+        console.log(b)
+        if(a.name=="考勤"){
+          router.push('/attendance')
+        }
+      },
       //合同查询
       handleUser(){
         //路由到用户界面
@@ -146,6 +159,22 @@ import router from "@/router/index";
               console.log(res.data.data)
               this.tableData = res.data.data
             })
+      },
+
+      loadNode0(node, resolve) {
+        //点击的那个菜单
+        if (node.level === 0) {
+          return resolve([{ name: '员工考勤' }]);
+        }
+        if (node.level > 1) return resolve([]);
+
+        setTimeout(() => {
+          const data = [{
+            name: '考勤',
+            leaf: true
+          }];
+          resolve(data);
+        }, 200);
       },
 
       loadNode(node, resolve) {
