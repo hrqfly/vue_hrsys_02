@@ -82,6 +82,11 @@ const router = createRouter({
             name:"attendance",
             path:"/attendance",
             component:()=>import("../views/AttendancePage.vue")
+        },
+        {
+            name:"addContract",
+            path:"/addContract",
+            component:()=>import("../views/AddContractPage.vue")
         }
     ]
 })

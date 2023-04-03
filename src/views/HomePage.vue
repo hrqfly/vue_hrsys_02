@@ -106,6 +106,9 @@ import router from "@/router/index";
         if(a.name=='合同查询'){
           router.push('/querycontract')
         }
+        if(a.name=='合同录入'){
+          router.push('/addContract')
+        }
       },
       //查询用户
       getUserByName(a,b){
@@ -265,7 +268,10 @@ import router from "@/router/index";
           const data = [{
             name: '合同查询',
             leaf: true
-          }];
+          }, {
+              name: '合同录入',
+              leaf: true
+            }];
           resolve(data);
         }, 200);
       }
