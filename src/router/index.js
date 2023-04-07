@@ -3,11 +3,11 @@ import axios from "axios";
 const router = createRouter({
     history:createWebHistory(),
     routes:[
-        {
-            name:"home",
-            path:"/home",
-            component:()=>import("../views/HomePage.vue")
-        },
+        // {
+        //     name:"home",
+        //     path:"/home",
+        //     component:()=>import("../views/HomePage.vue")
+        // },
         {
             name:"test",
             path:"/test",
@@ -87,6 +87,11 @@ const router = createRouter({
             name:"addContract",
             path:"/addContract",
             component:()=>import("../views/AddContractPage.vue")
+        },
+        {
+            name:"welcome",
+            path:"/welcome",
+            component:()=>import("../views/WelcomePage.vue")
         }
     ]
 })
@@ -94,8 +99,9 @@ const router = createRouter({
 //路由卫士
 router.beforeEach((to,from,next)=> {
     let checkToken = window.localStorage.getItem("token")
+    //if (to.path.startsWith('admin')&& !checkToken) {
     if (to.path !== '/login' && !checkToken) {
-        if (to.path === '/home'){
+        if (to.path === '/welcome'){
             next()
         }else {
             alert("请先登录")

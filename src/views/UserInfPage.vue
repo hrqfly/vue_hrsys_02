@@ -68,7 +68,7 @@ export default {
           .then(res => {
               alert(res.data.msg)
               // 退出登录则跳转回首页
-              router.push('/home')
+              router.push('/welcome')
           })
     },
   }

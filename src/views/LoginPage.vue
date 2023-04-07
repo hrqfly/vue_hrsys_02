@@ -44,7 +44,7 @@ const onSubmit = () => {
     if(res.data.status == 200 ){
       //跳转页面
       window.localStorage.setItem("token",JSON.stringify(res.data.msg))
-      router.push('/home')
+      router.push('/welcome')
     }else {
       alert(res.data.msg)
     }
