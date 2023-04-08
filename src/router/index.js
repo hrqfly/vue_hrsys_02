@@ -30,7 +30,7 @@ const router = createRouter({
         },
         {
             name:"adduser",
-            path:"/adduser",
+            path:"/admin/adduser",
             component:()=>import("../views/AddUserPage.vue")
         },
         {
@@ -99,8 +99,10 @@ const router = createRouter({
 //路由卫士
 router.beforeEach((to,from,next)=> {
     let checkToken = window.localStorage.getItem("token")
+    let checkSuperToken = window.localStorage.getItem("superToken")
     //if (to.path.startsWith('admin')&& !checkToken) {
     if (to.path !== '/login' && !checkToken) {
+        // 没有token
         if (to.path === '/welcome'){
             next()
         }else {
@@ -109,9 +111,35 @@ router.beforeEach((to,from,next)=> {
         }
     }
     else {
+        // 有token
         if (to.path === '/login'){
             window.localStorage.removeItem("token")
+            window.localStorage.removeItem("superToken")
             next()
+        }
+        
+        if (to.path.startsWith('/admin')) {
+            if (checkSuperToken){
+                // 检测管理员token合法性
+                let superToken = JSON.parse(window.localStorage.getItem('superToken'))
+                axios({
+                    url:'http://localhost:8010/checksupertoken',
+                    method:'get',
+                    headers:{
+                        superToken:superToken
+                    }
+                }).then((response) =>{
+                    if (!response.data){
+                        alert("权限等级不够！")
+                        next({path:"/welcome"})
+                    }else {
+                        next()
+                    }
+                })
+            }else {
+                alert("权限等级不够！")
+                next({path:"/welcome"})
+            }
         }
         // 检验token的合法性
         let token = JSON.parse(window.localStorage.getItem('token'))

@@ -43,7 +43,11 @@ const onSubmit = () => {
   .then(res =>{
     if(res.data.status == 200 ){
       //跳转页面
-      window.localStorage.setItem("token",JSON.stringify(res.data.msg))
+      console.log(res.data)
+      window.localStorage.setItem("token",JSON.stringify(res.data.data.token))
+      if (res.data.data.superToken){
+        window.localStorage.setItem("superToken",JSON.stringify(res.data.data.superToken))
+      }
       router.push('/welcome')
     }else {
       alert(res.data.msg)
@@ -58,7 +62,7 @@ const onSubmit = () => {
   .background{
     width:100%;
     height:100%;  /**宽高100%是为了图片铺满屏幕 */
-    z-index:-1;
+    z-index:0;
     position: absolute;
   }
   .front{

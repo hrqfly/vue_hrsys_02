@@ -119,7 +119,7 @@ export default {
         router.push('/queryuser')
       }
       if (a.name=='增加员工账号'){
-        router.push('/adduser')
+        router.push('/admin/adduser')
       }
     },
     // 查询招聘计划表
@@ -290,6 +290,7 @@ export default {
   #app{
     height: 100%;
   }
+
   #ti{
     height: 80px;
   }

@@ -64,6 +64,7 @@ export default {
     },
     handlerLogout(){
       window.localStorage.removeItem("token")
+      window.localStorage.removeItem("superToken")
       axios.post('http://localhost:8010/logout')
           .then(res => {
               alert(res.data.msg)
