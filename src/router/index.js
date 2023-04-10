@@ -92,6 +92,11 @@ const router = createRouter({
             name:"welcome",
             path:"/welcome",
             component:()=>import("../views/WelcomePage.vue")
+        },
+        {
+            name:"attendanceReview",
+            path:"/admin/attendanceReview",
+            component:()=>import("../views/AttendanceReviewPage.vue")
         }
     ]
 })

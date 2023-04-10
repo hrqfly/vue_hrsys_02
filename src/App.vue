@@ -88,6 +88,9 @@ export default {
       if(a.name=="考勤"){
         router.push('/attendance')
       }
+      if (a.name == "考勤审核"){
+        router.push('/admin/attendanceReview')
+      }
     },
     //合同查询
     handleUser(){
@@ -174,6 +177,9 @@ export default {
       setTimeout(() => {
         const data = [{
           name: '考勤',
+          leaf: true
+        },{
+          name: '考勤审核',
           leaf: true
         }];
         resolve(data);
