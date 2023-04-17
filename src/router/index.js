@@ -97,6 +97,17 @@ const router = createRouter({
             name:"attendanceReview",
             path:"/admin/attendanceReview",
             component:()=>import("../views/AttendanceReviewPage.vue")
+        },
+        {
+            name:"addHobies",
+            path:"/addHobies",
+            component:()=>import("../views/AddHobbiesPage.vue")
+        }
+        ,
+        {
+            name:"addSkills",
+            path:"/addSkills",
+            component:()=>import("../views/AddSkillPage.vue")
         }
     ]
 })
