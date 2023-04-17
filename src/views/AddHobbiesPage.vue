@@ -41,14 +41,16 @@ export default {
   methods: {
     onSubmit() {
       this.EmployeePortraitsInf.content = this.hobbies.hobby1+','+this.hobbies.hobby2+','+this.hobbies.hobby3
-      this.EmployeePortraitsInf.userId = this.cookies.userId,
-      axios.post("http://localhost:8010/addEmployeePortraitsInf", this.EmployeePortraitsInf).then(res => {
-            alert(res.data.msg)
-      })
-      // axios.get('http://localhost:8010/getEmployeePortraitsInf?userId='+this.cookies.userId+'&type=Hobbies')
-      //     .then(res => {
-      //         console.log(res.data.data)
-      //     })
+      this.EmployeePortraitsInf.userId = this.cookies.userId
+      if(this.EmployeePortraitsInf.content!=''){
+        axios.post("http://localhost:8010/addEmployeePortraitsInf", this.EmployeePortraitsInf).then(res => {
+          alert(res.data.msg)
+        })
+      }
+      axios.get('http://localhost:8010/getEmployeePortraitsInf?userId=' + this.cookies.userId + '&type=Hobbies')
+          .then(res => {
+            console.log(res.data.data)
+          })
     }
   }
 }

@@ -39,10 +39,10 @@ export default {
           alert(res.data.msg)
         })
       }
-      // axios.get('http://localhost:8010/getEmployeePortraitsInf?userId='+this.cookies.userId+'&type=Skills')
-      //     .then(res => {
-      //         console.log(res.data.data)
-      //     })
+      axios.get('http://localhost:8010/getEmployeePortraitsInf?userId='+this.cookies.userId+'&type=Skills')
+          .then(res => {
+              console.log(res.data.data)
+          })
     }
   }
 }
