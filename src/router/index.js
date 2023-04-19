@@ -102,12 +102,26 @@ const router = createRouter({
             name:"addHobies",
             path:"/addHobies",
             component:()=>import("../views/AddHobbiesPage.vue")
-        }
-        ,
+        },
         {
             name:"addSkills",
             path:"/addSkills",
             component:()=>import("../views/AddSkillPage.vue")
+        },
+        {
+            name:"addjobDev",
+            path:"/addjobDev",
+            component:()=>import("../views/AddJobDevPage.vue")
+        },
+        {
+            name:"OrgStructure",
+            path:"/OrgStructure",
+            component:()=>import("../views/OrgStructurePage.vue")
+        },
+        {
+            name:"EmployeePortraits",
+            path:"/EmployeePortraits",
+            component:()=>import("../views/EmployeePortraitsPage.vue")
         }
     ]
 })

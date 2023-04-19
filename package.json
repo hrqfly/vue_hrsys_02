@@ -11,9 +11,13 @@
     "@element-plus/icons-vue": "^2.1.0",
     "axios": "^1.3.4",
     "core-js": "^3.8.3",
+    "echarts": "^5.4.2",
+    "echarts-wordcloud": "^2.1.0",
     "element-plus": "^2.2.34",
     "vue": "^3.2.13",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "vue-wordcloud": "^1.1.1",
+    "wordcloud2": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
