@@ -127,6 +127,11 @@ const router = createRouter({
             name:"RadarChart",
             path:"/RadarChart",
             component:()=>import("../views/TestRadarChartPage.vue")
+        },
+        {
+            name:"AddEmployeeRatingPage",
+            path:"/admin/AddEmployeeRatingPage",
+            component:()=>import("../views/AddEmployeeRatingPage.vue")
         }
     ]
 })

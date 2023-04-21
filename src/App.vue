@@ -176,6 +176,9 @@ export default {
       if (a.name == '我的画像') {
         router.push('/EmployeePortraits')
       }
+      if (a.name == '员工画像各项评估') {
+        router.push('/admin/AddEmployeeRatingPage')
+      }
 
     },
     loadNode0(node, resolve) {
@@ -314,6 +317,9 @@ export default {
           leaf: true
         }, {
           name: '添加证书技能信息',
+          leaf: true
+        }, {
+          name: '员工画像各项评估',
           leaf: true
         }];
         resolve(data);
