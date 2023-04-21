@@ -25,6 +25,7 @@ export default {
         userId : document.cookie.split("; ")[0].split("=")[1].split("#")[0],
         userName : document.cookie.split("; ")[0].split("=")[1].split("#")[1],
       },
+      value:[],
     };
   },
   mounted: function () {
@@ -95,45 +96,58 @@ export default {
       })
     },
     drawLine() {
-      const myChart = echarts.init(this.$refs.main);
-      let figureData = [
-        { name: '业务能力', max: '100' },
-        { name: '技能评估', max: '100' },
-        { name: '人际交往能力', max: '100' },
-        { name: '发展潜力', max: '100' },
-        { name: '爱好发展', max: '100' },
 
-        // ...以此类推
-      ]
-      let data = [
-        {
-          name: this.cookies.userName,
-          value: [80, 90, 80, 82, 90],
-        },
-        // ...以此类推
-      ]
+      axios.get('http://localhost:8010/getApprovalEmployeeRating?userId=' + this.cookies.userId).then(res => {
 
-      let option = {
-        legend: {
-          data: ['name1']
-        }, // 数据名
-        tooltip: { // 设置展示雷达图详细参数
-          show: true,
-          trigger: 'item',
-        },
-        radar: { indicator: figureData, }, // 雷达图参数
-        series: [
+        this.value.push(res.data.data.professional)
+        this.value.push(res.data.data.skills)
+        this.value.push(res.data.data.interpersonal)
+        this.value.push(res.data.data.potential)
+        this.value.push(res.data.data.careerDev)
+
+        //画雷达图
+        const myChart = echarts.init(this.$refs.main);
+        let figureData = [
+          { name: '业务能力', max: '100' },
+          { name: '技能评估', max: '100' },
+          { name: '人际交往', max: '100' },
+          { name: '潜力', max: '100' },
+          { name: '发展', max: '100' },
+
+          // ...以此类推
+        ]
+        let data = [
           {
-            type: 'radar',
-            label: { show: true, }, // 是否显示值
-            areaStyle: {}, // 阴影
-            animationDuration: 3000, // 动画时间
-            data: data,
+            name: this.cookies.userName,
+            //value: [80, 90, 80, 82, 90],
+            value: this.value,
           },
-        ],
-        backgroundColor: "#fff",
-      }
-      myChart.setOption(option)
+          // ...以此类推
+        ]
+
+        let option = {
+          legend: {
+            data: ['name1']
+          }, // 数据名
+          tooltip: { // 设置展示雷达图详细参数
+            show: true,
+            trigger: 'item',
+          },
+          radar: { indicator: figureData, }, // 雷达图参数
+          series: [
+            {
+              type: 'radar',
+              label: { show: true, }, // 是否显示值
+              areaStyle: {}, // 阴影
+              animationDuration: 3000, // 动画时间
+              data: data,
+            },
+          ],
+          backgroundColor: "#fff",
+        }
+        myChart.setOption(option)
+
+      })
     }
 
   }

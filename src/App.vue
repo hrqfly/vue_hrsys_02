@@ -122,6 +122,9 @@ export default {
       if (a.name=='增加员工账号'){
         router.push('/admin/adduser')
       }
+      if(a.name == '我的组织架构'){
+        router.push('/OrgStructure')
+      }
     },
     // 查询招聘计划表
     getRecruitmentPlan(a,b){
@@ -207,6 +210,9 @@ export default {
           leaf: true
         }, {
           name: '增加员工账号',
+          leaf: true
+        }, {
+          name: '我的组织架构',
           leaf: true
         }];
         resolve(data);

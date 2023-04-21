@@ -15,10 +15,23 @@
       <el-button type="primary" @click="onSubmit">添加</el-button>
     </el-form-item>
   </el-form>
+
+  <h2 style="text-align: center">编辑工作发展信息</h2>
+  <el-table :data="tableData" border style="width: 50%;margin: auto">
+    <el-table-column prop="jobDev" label="爱好" />
+    <el-table-column
+        fixed="right"
+        label="操作">
+      <template #default="scope">
+        <el-button @click="handleEdit(scope.row)" type="primary" size="small">删除</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
 </template>
 
 <script>
 import axios from "axios";
+import router from "@/router/index";
 export default {
   data() {
     return {
@@ -35,8 +48,14 @@ export default {
         userId: 0,
         type:'jobDev',
         content:'',
-      }
+      },
+      tableData:[
+        // {jobDev:'giao'},
+      ],
     };
+  },
+  mounted: function () {
+    this.loadData();
   },
   methods: {
     onSubmit() {
@@ -46,11 +65,25 @@ export default {
         axios.post("http://localhost:8010/addEmployeePortraitsInf", this.EmployeePortraitsInf).then(res => {
           alert(res.data.msg)
         })
+        router.go(0)
       }
-      axios.get('http://localhost:8010/getEmployeePortraitsInf?userId=' + this.cookies.userId + '&type=jobDev')
-          .then(res => {
-            console.log(res.data.data)
-          })
+    },
+    handleEdit(row){
+      this.EmployeePortraitsInf.content = row.jobDev
+      this.EmployeePortraitsInf.userId = this.cookies.userId
+      axios.post("http://localhost:8010/deleteEmployeePortraitsInf", this.EmployeePortraitsInf).then(res => {
+        alert(res.data.msg)
+      })
+      console.log(this.EmployeePortraitsInf)
+      this.tableData = []
+      this.loadData()
+    },
+    loadData(){
+      axios.get('http://localhost:8010/getEmployeePortraitsInf?userId=' + this.cookies.userId + '&type=jobDev').then(res => {
+        for (let i = 0 ; i<res.data.data.length;i++){
+          this.tableData.push({jobDev : res.data.data[i]})
+        }
+      })
     }
   }
 }
