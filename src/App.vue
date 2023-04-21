@@ -39,6 +39,12 @@
             lazy
             @node-click = "getContract">
         </el-tree>
+        <el-tree
+            :props="props"
+            :load="loadNode5"
+            lazy
+            @node-click = "getEmployeePortraits">
+        </el-tree>
       </el-aside>
       <el-container>
         <el-header>
@@ -48,14 +54,6 @@
           </div>
         </el-header>
         <el-main>
-<!--          <h2 id="ti">招聘公告</h2>-->
-<!--          <el-table :data="tableData" border style="width: 100%">-->
-<!--            <el-table-column prop="post" label="职位" width="160" />-->
-<!--            <el-table-column prop="num" label="招聘人数" width="160" />-->
-<!--            <el-table-column prop="age" label="年龄要求" width="160" />-->
-<!--            <el-table-column prop="wages" label="薪资" width="160" />-->
-<!--            <el-table-column prop="requirements" label="要求" />-->
-<!--          </el-table>-->
           <router-view></router-view>
         </el-main>
       </el-container>
@@ -92,7 +90,6 @@ export default {
         router.push('/admin/attendanceReview')
       }
     },
-    //合同查询
     handleUser(){
       //路由到用户界面
       console.log(this.cookies.cookies)
@@ -104,6 +101,7 @@ export default {
         router.push('/userinf')
       }
     },
+    //合同查询
     getContract(a,b){
       console.log(a)
       console.log(b)
@@ -136,6 +134,7 @@ export default {
         router.push('/addplan')
       }
     },
+    //培训
     getTrain(a,b){
       console.log(a)
       console.log(b)
@@ -159,14 +158,23 @@ export default {
         router.push('/querysalary')
       }
     },
-    // divClick(){
-    //   //发送请求去后端查询数据
-    //   axios.get('http://localhost:8010/findplan?post='+"coo")
-    //       .then(res => {
-    //         console.log(res.data.data)
-    //         this.tableData = res.data.data
-    //       })
-    // },
+    getEmployeePortraits(a,b) {
+      console.log(a)
+      console.log(b)
+      if (a.name == '添加兴趣爱好信息') {
+        router.push('/addHobies')
+      }
+      if (a.name == '添加工作发展信息') {
+        router.push('/addjobDev')
+      }
+      if (a.name == '添加证书技能信息') {
+        router.push('/addSkills')
+      }
+      if (a.name == '我的画像') {
+        router.push('/EmployeePortraits')
+      }
+
+    },
     loadNode0(node, resolve) {
       //点击的那个菜单
       if (node.level === 0) {
@@ -276,6 +284,30 @@ export default {
           leaf: true
         }, {
           name: '合同录入',
+          leaf: true
+        }];
+        resolve(data);
+      }, 200);
+    },
+    loadNode5(node, resolve) {
+      //点击的那个菜单
+      if (node.level === 0) {
+        return resolve([{name: '员工画像'}]);
+      }
+      if (node.level > 1) return resolve([]);
+
+      setTimeout(() => {
+        const data = [{
+          name: '我的画像',
+          leaf: true
+        },{
+          name: '添加兴趣爱好信息',
+          leaf: true
+        }, {
+          name: '添加工作发展信息',
+          leaf: true
+        }, {
+          name: '添加证书技能信息',
           leaf: true
         }];
         resolve(data);

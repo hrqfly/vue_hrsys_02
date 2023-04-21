@@ -1,53 +1,39 @@
 <!--  -->
 <template>
   <div>
-    <div id="wordCloud" style="height: 800px; width: 800px;"></div>
+    <h1 style="text-align: center;height: 20px">员工综合信息标签</h1>
+    <div id="wordCloud" style="height: 300px"></div>
   </div>
+  <h1 style="text-align: center;height: 20px">员工能力雷达图</h1>
+  <div id="main" style="height:300px" ref="main"></div>
 </template>
 
 <script>
-import * as echarts from 'echarts/core';
 import 'echarts-wordcloud';
 import axios from "axios";
 import { TitleComponent } from 'echarts/components';
+import * as echarts from "echarts";
 echarts.use([TitleComponent]);
 export default {
   data() {
     return {
       echartsData: [
         //{ value: '1', name: 'VIVO' },
-        // { value: '1', name: 'OPPO' },
-        // { value: '1', name: 'HONOR' },
-        // { value: '27', name: '红米' },
-        // { value: '26', name: '小米' },
-        // { value: '25', name: '美图' },
-        // { value: '24', name: 'ONEPLUS' },
-        // { value: '23', name: '魅族' },
-        // { value: '22', name: '红手指' },
-        // { value: '21', name: 'SAMSUNG' },
-        // { value: '20', name: '金立' },
-        // { value: '16', name: 'BLACKBERRY' },
-        // { value: '15', name: '诺基亚' },
-        // { value: '14', name: '锤子' },
-        // { value: '13', name: '大疆' },
-        // { value: '12', name: '361' },
-        // { value: '11', name: '摩托罗拉' },
-        // { value: '10', name: '联想' },
-        // { value: '9', name: '玩家国度' },
       ],
       jobDev:[],
       cookies:{
         userId : document.cookie.split("; ")[0].split("=")[1].split("#")[0],
+        userName : document.cookie.split("; ")[0].split("=")[1].split("#")[1],
       },
     };
   },
   mounted: function () {
     this.initChart();
+    this.drawLine();
   },
   methods: {
     initChart() {
-
-      axios.get('http://localhost:8010/getEmployeePortraitsInf?userId=' + this.cookies.userId + '&type=jobDev').then(res => {
+      axios.get('http://localhost:8010/getAllEmployeePortraitsInf?userId=' + this.cookies.userId).then(res => {
         this.jobDev = res.data.data
         console.log(this.jobDev)
         for (let i = 0;i <= this.jobDev.length;i++){
@@ -74,7 +60,7 @@ export default {
               //用来调整词的旋转方向，，[0,0]--代表着没有角度，也就是词为水平方向，需要设置角度参考注释内容
               // rotationRange: [-45, 0, 45, 90],
               // rotationRange: [ 0,90],
-              rotationRange: [0, 45],
+              rotationRange: [-45, 0, 45, 90],
               //随机生成字体颜色
               // maskImage: maskImage,
               textStyle: {
@@ -107,7 +93,47 @@ export default {
           console.log('myChart----click---:', params, '------', params.data)
         });
       })
+    },
+    drawLine() {
+      const myChart = echarts.init(this.$refs.main);
+      let figureData = [
+        { name: '业务能力', max: '100' },
+        { name: '技能评估', max: '100' },
+        { name: '人际交往能力', max: '100' },
+        { name: '发展潜力', max: '100' },
+        { name: '爱好发展', max: '100' },
 
+        // ...以此类推
+      ]
+      let data = [
+        {
+          name: this.cookies.userName,
+          value: [80, 90, 80, 82, 90],
+        },
+        // ...以此类推
+      ]
+
+      let option = {
+        legend: {
+          data: ['name1']
+        }, // 数据名
+        tooltip: { // 设置展示雷达图详细参数
+          show: true,
+          trigger: 'item',
+        },
+        radar: { indicator: figureData, }, // 雷达图参数
+        series: [
+          {
+            type: 'radar',
+            label: { show: true, }, // 是否显示值
+            areaStyle: {}, // 阴影
+            animationDuration: 3000, // 动画时间
+            data: data,
+          },
+        ],
+        backgroundColor: "#fff",
+      }
+      myChart.setOption(option)
     }
 
   }
