@@ -179,6 +179,9 @@ export default {
       if (a.name == '员工画像各项评估') {
         router.push('/admin/AddEmployeeRatingPage')
       }
+      if(a.name == '各项评估审批'){
+        router.push('/admin/AprEmployeeRatingPage')
+      }
 
     },
     loadNode0(node, resolve) {
@@ -320,6 +323,9 @@ export default {
           leaf: true
         }, {
           name: '员工画像各项评估',
+          leaf: true
+        }, {
+          name: '各项评估审批',
           leaf: true
         }];
         resolve(data);

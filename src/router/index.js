@@ -132,6 +132,11 @@ const router = createRouter({
             name:"AddEmployeeRatingPage",
             path:"/admin/AddEmployeeRatingPage",
             component:()=>import("../views/AddEmployeeRatingPage.vue")
+        },
+        {
+            name:"AprEmployeeRatingPage",
+            path:"/admin/AprEmployeeRatingPage",
+            component:()=>import("../views/AprEmployeeRatingPage.vue")
         }
     ]
 })
